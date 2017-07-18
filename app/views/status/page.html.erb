@@ -1,0 +1,78 @@
+<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<center><h3>At Ultimo</h3></center>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			<center>
+				<button onclick="loadDoc()" id="dem1" class="img-circle btn btn-danger" alt="140x140" style="width: 140px; height: 140px;">
+				<h3>Slot 1</h3>
+				<!--<h4>Taken</h4>-->
+				<div id="demo1"></div>
+			</center>
+			</div>
+			<div class="col-md-3">
+			<center>
+				<button onclick="loadDoc()" id="dem2" class="img-circle btn btn-success" alt="140x140" style="width: 140px; height: 140px;">
+				<h3>Slot 2</h3>
+				<!--<h4>Free</h4>-->
+				<div id="demo2"></div>
+			</center>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	
+	</script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- <script src="myscript.js"></script> -->
+	<script type="text/javascript">
+	$(document).ready(function(){
+		loadDoc();
+		setInterval(loadDoc, 1000);
+	});
+	function loadDoc() {
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.open("GET", "/parks.json", true);
+	  xhttp.send();
+	  $.ajax('GET', "/parks.json")
+	  xhttp.onreadystatechange = function() {
+	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	       if (xhttp.responseText=="404") {
+		      	document.getElementById("dem1").className = "img-circle btn btn-danger";
+		      document.getElementById("demo1").innerHTML = "<div style=\"color:green;\">Free</p>";
+	  		}
+	  	   else {
+	  	   	document.getElementById("dem1").className = "img-circle btn btn-success";
+	  	   	document.getElementById("demo1").innerHTML = "<div style=\"color:red;\">Parked</p>";
+	  	   }
+
+	    }
+	  };
+
+	  var xhttpa = new XMLHttpRequest();
+	  xhttpa.open("GET", "state2.txt", true);
+	  xhttpa.send();
+	  xhttpa.onreadystatechange = function() {
+	    if (xhttpa.readyState == 4 && xhttpa.status == 200) {
+	       if (xhttpa.responseText=="404") {
+	      	document.getElementById("dem2").className = "img-circle btn btn-danger";
+	      document.getElementById("demo2").innerHTML = "<div style=\"color:green;\">Free</p>";
+	  }
+	  	   else	{
+	  	   	document.getElementById("dem2").className = "img-circle btn btn-success";
+	  	   	document.getElementById("demo2").innerHTML = "<div style=\"color:red;\">Parked</p>";
+	  	   }
+	    }
+	  };
+	 
+	}
+	</script>
+	
