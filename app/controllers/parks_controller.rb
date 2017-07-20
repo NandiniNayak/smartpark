@@ -7,6 +7,7 @@ class ParksController < ApplicationController
   # GET /parks
   # GET /parks.json
   def index
+    
     puts "555555555555555555555555555555555555555555555555"
     @parks = Park.all
     mypark = Park.last.status
@@ -40,10 +41,23 @@ class ParksController < ApplicationController
   # POST /parks.json
   def create
     @park = Park.new(creation_params)
-    # # @park.status = params[:state]
+ 
+    # Before making a new entry to the database delete the previous records in the 
+    # database , this autodeletion does not overload the buffer with too redundant 
+    # old data
+    Park.where(:id => Park.last.id).delete_all
+    
+    # Now fetch the data sent from arduino and store the information 
+    # in the status variable of the database
+    
     @park.status = params[:state]
+    
+    # code introduced for debugging purpose
+    
     puts params.inspect
-      puts "=================================================="
+    puts "=================================================="
+      
+      
     respond_to do |format|
       if @park.save
         format.html { redirect_to @park, notice: 'Park was successfully created.' }
