@@ -7,20 +7,13 @@ class ParksController < ApplicationController
   # GET /parks
   # GET /parks.json
   def index
-    
     puts "555555555555555555555555555555555555555555555555"
     @parks = Park.all
     mypark = Park.last.status
     
     puts mypark.inspect
     puts mypark.to_json
-    # return JSON.Array park, :status
-    # return park.to_builder.target!
-    # ActiveRecord::Base.include_root_in_json = true
     return mypark.to_json
-    # return park.as_json
-   
-    # puts "#{park.to_json}"
   end
 
   # GET /parks/1
