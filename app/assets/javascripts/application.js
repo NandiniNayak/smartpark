@@ -8,11 +8,9 @@
 
 	function loadDoc() {
 	  $.getJSON("/parks",function(json){
-	  //xhttp.open("GET", "state3.txt function(json){
 	    parkjson = json;
 	    // var last = (last=Object.keys(json))[last.length-1];
 	    // var lastElement = jsonObject.parks[jsonObject.parks.length-1].status
-
 	    // JSONObject tot_obj = parkjson.getJSONObject(parkjson.length()-1);
 	    lastobj = parkjson[parkjson.length-1]
 	    console.log(lastobj.status)
